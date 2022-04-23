@@ -1,19 +1,15 @@
 pipeline {
-    agent {
-      docker {
-        image 'python:latest'
-      }
-    }
+    agent any
     stages {
       stage('Build') {
         steps {
-          sh 'echo Hello, world!'
+          sh 'poetry install'
         }
       }
       stage('Test') {
         steps {
-          sh 'pip install pytest'
-          sh 'pytest -v -s tests'
+          sh 'poetry install'
+          sh 'poetry run pytest -v -s tests'
         }
       }
     }
